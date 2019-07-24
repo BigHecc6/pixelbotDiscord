@@ -21,7 +21,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
 	console.log('Established connection to server!')
 });
-dsdasd
+
 
 //Message Listener
 client.on('message', message => {
