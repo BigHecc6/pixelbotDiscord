@@ -2,7 +2,7 @@ module.exports = {
   name: 'clear',
   description: 'Deletes a specified number of messages. Context: !clear (1-99)',
   usage: '!clear (1-99)',
-  guildOnly: true;
+  guildOnly: true,
   execute(message, args) {
     const amount = parseInt(args[0]) + 1;
     if (!message.member.permissions.has('MANAGE_MESSAGES')) {

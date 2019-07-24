@@ -34,7 +34,7 @@ client.on('message', message => {
 
 	if (!client.commands.has(commandName)) return;
 
-	const command = client.commands.get(commandName)l
+	const command = client.commands.get(commandName);
 
 	try {
 		command.execute(message, args);
