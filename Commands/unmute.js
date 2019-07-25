@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'mute',
+  name: 'unmute',
   description: 'Unmutes a specified member. Context: !unmute (@member)',
   guildOnly: true,
   execute(message, args) {
