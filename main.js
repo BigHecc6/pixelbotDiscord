@@ -1,3 +1,4 @@
+//Call main modules
 const fs = require('fs');
 const Discord = require('discord.js');
 const Commando = require('discord.js-commando');
@@ -6,6 +7,7 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+//Command handling
 const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));
 
 
@@ -17,7 +19,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-//Tell ready
+//Start listening
 client.once('ready', () => {
 	console.log('Established connection to server!')
 });
