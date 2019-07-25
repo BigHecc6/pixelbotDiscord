@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'mute',
+  name: 'unmute',
   description: 'Unmutes a specified member. Context: !unmute (@member)',
   guildOnly: true,
   execute(message, args) {
@@ -15,7 +15,7 @@ module.exports = {
     const toMute = message.mentions.users.first();
     const member = message.guild.member(toMute);
 
-    member.removerole('603715750288556043');
-    message.channel.send(`${member} has been unmuted.`)
+    member.removeRole('603715750288556043');
+    message.channel.send(`${member} has been unmuted.`);
   },
 };

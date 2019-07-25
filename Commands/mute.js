@@ -13,7 +13,7 @@ module.exports = {
     const toMute = message.mentions.users.first();
     const member = message.guild.member(toMute);
 
-    member.addrole('603715750288556043');
+    member.addRole('603715750288556043');
     message.channel.send(`${member} HAS BEEN MUTED. If you are unsure why, please consult a staff member via DM.`);
   },
 };
