@@ -39,7 +39,7 @@ client.on('message', message => {
 	try {
 		command.execute(message, args);
 	} catch (error) {
-			console.error(error);
+			console.log(error);
 			message.reply('an error occured when you tried to execute the command. Please Ensure you typed it correctly. If you have typed it correctly, ask @ChaseBTVG to diagnose.');
 	}
 });
