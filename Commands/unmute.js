@@ -17,6 +17,5 @@ module.exports = {
 
     member.removerole('603715750288556043');
     message.channel.send(`${member} has been unmuted.`)
-      }
   },
 };
