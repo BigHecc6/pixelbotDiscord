@@ -16,7 +16,6 @@ module.exports = {
     const userToBan = message.mentions.users.first();
     const banReason = args.slice(2).join(' ');
     const length = args[1];
-
     const member = message.guild.member(userToBan);
     if (length !== 'indef') {
       if (banReason) {

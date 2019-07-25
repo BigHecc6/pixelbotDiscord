@@ -9,14 +9,14 @@ module.exports = {
       return message.reply("no one was mentioned.");
     } else if (message.mentions.users.bot) {
       return message.reply("I cannot mute bots. You can do it yourself locally.");
+    } else if (message.mentions.members.roles.id !== '603715750288556043') {
+      return message.channel.send('This member is not muted.');
     }
     const toMute = message.mentions.users.first();
     const member = message.guild.member(toMute);
 
     member.removerole('603715750288556043');
     message.channel.send(`${member} has been unmuted.`)
-      .catch(error) {
-        message.channel.send('An error occured while trying to unmute. Is this person unmuted already?');
       }
   },
 };
