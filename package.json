@@ -13,8 +13,6 @@
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
     "eslint": "^6.1.0",
-    "ffmpeg": "0.0.4",
-    "ffmpeg-binaries": "^4.0.0",
     "node": "10.16.0",
     "opusscript": "0.0.6",
     "youtube-search": "^1.1.4",
