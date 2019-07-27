@@ -22,7 +22,12 @@ Context: "![un]mute (member)"
 
 __!clear__:
 Clears a specified number of messages.
-Context: "!clear (number from 1 to 99)
+Context: "!clear (number from 1 to 99)"
+
+**MUSIC**
+__!play__
+Plays or adds a specified song to queue.
+Context: "!play (Song URL)"
 
 **MISCELLANEOUS**
 

@@ -2,10 +2,11 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const Commando = require('discord.js-commando');
-const { prefix, token } = require('./config.json');
+const { prefix, prefix2, prefix3, token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
 
 //Command handling
 const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));
@@ -46,4 +47,6 @@ client.on('message', message => {
 	}
 });
 
+
+//Login to bot
 client.login(token);
