@@ -1,6 +1,6 @@
 //Call required modules for music
 const ytdl = require('ytdl-core');
-
+const FFMPEG = require('ffmpeg');
 module.exports = {
   name: "play",
   description: "Plays or adds a song to queue.",

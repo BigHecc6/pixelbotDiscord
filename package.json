@@ -1,6 +1,6 @@
 {
   "name": "pixelBot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Discord Bot for Discord that's a bot for Discord.",
   "main": "main.js",
   "scripts": {
