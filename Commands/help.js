@@ -1,10 +1,7 @@
 
 module.exports = {
-  name: "help",
-  description: "You should know, you're using it :p",
-  usage: "!help [Topic]",
   guildOnly: false,
-  execute(message, args) {
+  execute(client, message, args) {
     message.author.send(`Here are the commands:
 **ADMINISTRATIVE**
 

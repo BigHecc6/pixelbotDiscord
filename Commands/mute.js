@@ -1,11 +1,9 @@
 module.exports = {
   name: 'mute',
-  description: 'Mutes a specified member. Context: !mute (@member)',
   guildOnly: true,
-  execute(message, args) {
-    if (!message.member.permissions.has('MUTE_MEMBERS')) {
-      return message.reply("you don't have the required permission.");
-    } else if (!message.mentions.users.size) {
+  perms: "MUTE_MEMBERS",
+  execute(client, message, args) {
+    if (!message.mentions.users.size) {
       return message.reply("no one was mentioned.");
     } else if (message.mentions.users.bot) {
       return message.reply("I cannot mute bots. You can do it yourself locally.");

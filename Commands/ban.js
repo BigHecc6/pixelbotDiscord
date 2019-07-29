@@ -1,13 +1,10 @@
 module.exports = {
-  name: 'ban',
-  description: 'Bans a member from the server. Context: !ban (member) (hours OR "indef") [reason]',
-  usage: '!ban (member) (hours OR "indef") [reason]',
+  name: "ban",
   guildOnly: true,
-  execute(message, args) {
+  perms: 'BAN_MEMBERS',
+  execute(client, message, args) {
     //Checks if syntax is correct
-    if (!message.member.permissions.has('BAN_MEMBERS')) {
-      return message.reply("you don't have the required permission.");
-    } else if (!message.mentions.users.size) {
+    if (!message.mentions.users.size) {
       return message.reply("no one was mentioned.");
     }
     const userToBan = message.mentions.users.first();

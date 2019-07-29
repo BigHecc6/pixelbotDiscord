@@ -1,7 +1,7 @@
 {
   "name": "pixelBot",
   "version": "0.0.2",
-  "description": "Discord Bot for Discord that's a bot for Discord.",
+  "description": "Main bot for the Pixel Den",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
@@ -14,10 +14,12 @@
     "discord.js-commando": "^0.10.0",
     "eslint": "^6.1.0",
     "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
     "ffmpeg-static": "^2.5.0",
     "node": "10.16.0",
     "opusscript": "0.0.6",
     "youtube-search": "^1.1.4",
+    "yt-search": "^0.4.1",
     "ytdl-core": "^0.29.3"
   }
 }

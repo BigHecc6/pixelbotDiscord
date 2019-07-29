@@ -1,21 +1,59 @@
 //Call required modules for music
 const ytdl = require('ytdl-core');
 const FFMPEG = require('ffmpeg');
+
+
+
 module.exports = {
   name: "play",
-  description: "Plays or adds a song to queue.",
   guildOnly: true,
-    async execute(message, args) {
+  musicCMD: true,
+    async execute(client, message, args, ops) {
       const queueChan = message.guild.channels.find(queueChan => queueChan.id === '598979377006641153');
       const musicChan = message.guild.channels.find(musicChan => musicChan.id === '598979052661112834');
-      if (message.channel !== queueChan) return message.channel.send(`Please put music in the ${queueChan} channel.`);
-      if (message.guild.me.voiceChannel) return message.channel.send('Im already connected, sry.');
       if (!args[0]) return message.channel.send('Input a URL please.');
       const validate = await ytdl.validateURL(args[0]);
-      if (!validate) return message.channel.send('Input a **valid** url, please.');
-      const info = await ytdl.getInfo(args[0]);
-      let connection = await musicChan.join();
-      let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly'}));
-      message.channel.send(`Now playing: ${info.title}`);
-  },
+      if (!validate) {
+        let commandFile = require('./search.js');
+        return commandFile.execute(client, message, args, ops);
+      }
+      let info = await ytdl.getInfo(args[0]);
+      let data = ops.active.get(message.guild.id) || {};
+      if (!data.connection) data.connection = await musicChan.join();
+      if (!data.queue) data.queue = [];
+      data.guildID = message.guild.id;
+      data.queue.push({
+        songTitle: info.title,
+        requester: message.author.tag,
+        url: args[0]
+      });
+      if (!data.dispatcher) play(client, ops, data);
+      else {
+        message.channel.send(`${info.title} Added To Queue. | Requested By: ${message.author.tag}`);
+      }
+      ops.active.set(message.guild.id, data);
+
+
+
+  async function play(client, ops, data) {
+  message.channel.send(`Now Playing: ${data.queue[0].songTitle} | Requested By: ${data.queue[0].requester}`);
+    data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, { filter: 'audioonly'}));
+    data.dispatcher.guildID = data.guildID;
+    data.dispatcher.once('end', () => {
+      end(client, ops, data);
+    });
+  }
+  function end(client, ops, dispatcher) {
+    let fetched = ops.active.get(dispatcher.guildID);
+    fetched.queue.shift();
+    if (fetched.queue.length > 0) {
+      ops.active.set(dispatcher.guildID, fetched);
+      play(client,ops,fetched);
+    } else {
+      ops.active.delete(dispatcher.guildID);
+      let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel;
+      if (vc) vc.leave();
+  }
+}
+},
 };

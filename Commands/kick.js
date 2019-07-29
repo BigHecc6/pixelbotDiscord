@@ -1,12 +1,9 @@
 module.exports = {
   name: 'kick',
-  description: 'Kicks a member from the server. Context: !kick (member) [reason]',
-  usage: '!kick (member) [reason]',
   guildOnly: true,
-  execute(message, args) {
-    if (!message.member.permissions.has('KICK_MEMBERS')) {
-      return message.reply("you don't have the required permission.");
-    } else if (!message.mentions.users.size) {
+  perms: "KICK_MEMBERS",
+  execute(client, message, args) {
+    if (!message.mentions.users.size) {
       return message.reply("no one was mentioned.");
     } else if (message.mentions.users.bot) {
       return message.reply("I cannot kick bots. Please try to do it yourself.");

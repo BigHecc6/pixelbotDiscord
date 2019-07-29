@@ -1,13 +1,9 @@
 module.exports = {
-  name: 'clear',
-  description: 'Deletes a specified number of messages. Context: !clear (1-99)',
-  usage: '!clear (1-99)',
+  name: "clear",
   guildOnly: true,
-  execute(message, args) {
+  perms: "MANAGE_MESSAGES",
+  execute(client, message, args) {
     const amount = parseInt(args[0]) + 1;
-    if (!message.member.permissions.has('MANAGE_MESSAGES')) {
-      return message.reply("you don't have the required permission.")
-    }
     if (isNaN(amount)) {
         return message.reply('please enter a number.')
           .then(message => {

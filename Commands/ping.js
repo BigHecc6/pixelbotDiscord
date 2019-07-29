@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'ping',
-  description: 'Tests the lag.',
-  execute(message) {
+  name: "ping",
+  guildOnly: false,
+  execute(client, message) {
     message.channel.send('Pong!');
   },
 };

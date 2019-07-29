@@ -2,10 +2,11 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const Commando = require('discord.js-commando');
-const { prefix, prefix2, prefix3, token } = require('./config.json');
+const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+const active = new Map();
 
 
 //Command handling
@@ -34,16 +35,24 @@ client.on('message', message => {
 
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
+	const ops = {
+		active: active
+	}
 
 	if (!client.commands.has(commandName)) return;
 
 	const command = client.commands.get(commandName);
 
+	if (command.guildOnly && message.channel.type !== 'text') return message.channel.send('You can only use this command in the server.');
+	if (command.perms && !message.member.permissions.has(command.perms)) return message.reply("You don't have the required permissions to use this command.");
+	const quecha = message.guild.channels.find(quecha => quecha.id === '598979377006641153');
+	if (command.musicCMD && message.channel !== quecha) return message.channel.send(`Please put music-related commands in the ${quecha} channel.`);
+
 	try {
-		command.execute(message, args);
+		command.execute(client, message, args, ops);
 	} catch (error) {
 			console.log(error);
-			message.reply('an error occured when you tried to execute the command. Please Ensure you typed it correctly. If you have typed it correctly, ask @ChaseBTVG to diagnose.');
+			message.reply('an error occured.');
 	}
 });
 
