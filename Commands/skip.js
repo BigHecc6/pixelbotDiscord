@@ -17,7 +17,7 @@ module.exports = {
         message.channel.send(`Ending the song...`);
         return fetched.dispatcher.emit('end');
       }
-      message.channel.send(`The majority wins. Skipping ${fetched.queue[0]}...`);
+      message.channel.send(`Skipping ${fetched.queue[0].songTitle}...`);
       return fetched.dispatcher.emit('end');
     }
     message.channel.send(`Voted to skip! ${fetched.queue[0].voteSkips.length}/${required} required.`);

@@ -20,6 +20,7 @@ module.exports = {
       collector.once('collect', function(m) {
         let commandFile = require(`./play.js`);
         commandFile.execute(client, message, [this.videos[parseInt(m.content)-1].url], ops);
+        console.log("https://www.youtube.com" + this.videos[parseInt(m.content)-1].url);
       })
     });
   }

@@ -1,10 +1,9 @@
-// THIS COMMAND MIGHT BE TEMPORARY
-
+//Leaves the music channel, if connected.
 module.exports = {
   name: "leave",
   guildOnly: true,
   musicCMD: true,
-  async execute(client, message) {
+  async execute(client, message, args, ops) {
     const queueChan = message.guild.channels.find(queueChan => queueChan.id === '598979377006641153');
     const musicChan = message.guild.channels.find(musicChan => musicChan.id === '598979052661112834');
     if (message.channel !== queueChan) return message.channel.send(`Please put music-related commands in the ${queueChan} channel.`);
