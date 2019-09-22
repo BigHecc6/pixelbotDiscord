@@ -4,10 +4,10 @@ module.exports = {
   perms: "KICK_MEMBERS",
   execute(client, message, args) {
     if (!message.mentions.users.size) {
-      return message.reply("no one was mentioned.");
+      return message.reply("ERROR 417: no one was mentioned.");
     } else if (message.mentions.users.bot) {
       return message.reply("I cannot kick bots. Please try to do it yourself.");
-    } else if (!message.mentions.members.kickable) {
+    } else if (message.mentions.members.kickable) {
       return message.reply("this member can not be kicked.");
     }
     const userToKick = message.mentions.users.first();
@@ -16,14 +16,14 @@ module.exports = {
     const member = message.guild.member(userToKick);
     if (kickReason) {
       member.kick(`${kickReason}`)
-      message.channel.send(`${member} has been kicked. Reason: ${kickReason}`)
+      message.channel.send(`CONTINUE, ${member}? Timed out. GAME OVER. Clause: ${kickReason}`)
         .then(message => {
           message.delete(5000);
         })
       message.delete(5000);
     } else {
       member.kick();
-      message.channel.send(`${member} has been kicked.`)
+      message.channel.send(`CONTINUE, ${member}? Timed out. GAME OVER.`)
         .then(message => {
           message.delete(5000);
         })

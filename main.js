@@ -1,7 +1,9 @@
+//Uncomment this to keep bot offline
+
 //Call main modules
 const fs = require('fs');
 const Discord = require('discord.js');
-const Commando = require('discord.js-commando');
+
 const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
@@ -23,7 +25,7 @@ for (const file of commandFiles) {
 
 //Start listening
 client.once('ready', () => {
-	console.log('Established connection to server!')
+	console.log('BEEP! Code 200: Successfully connected!')
 });
 
 
@@ -43,18 +45,30 @@ client.on('message', message => {
 
 	const command = client.commands.get(commandName);
 
-	if (command.guildOnly && message.channel.type !== 'text') return message.channel.send('You can only use this command in the server.');
-	if (command.perms && !message.member.permissions.has(command.perms)) return message.reply("You don't have the required permissions to use this command.");
+	if (command.guildOnly && message.channel.type !== 'text') return message.channel.send('ERROR 421: You can only use this command in the server.');
+	if (command.perms && !message.member.permissions.has(command.perms)) return message.channel.send("ERROR 401: You don't have the required permissions to use this command.");
 	const quecha = message.guild.channels.find(quecha => quecha.id === '598979377006641153');
-	if (command.musicCMD && message.channel !== quecha) return message.channel.send(`Please put music-related commands in the ${quecha} channel.`);
+	if (command.musicCMD && message.channel !== quecha) return message.channel.send(`ERROR 421: Please put music-related commands in the ${quecha} channel.`);
 
 	try {
 		command.execute(client, message, args, ops);
 	} catch (error) {
 			console.log(error);
-			message.reply('an error occured.');
+			message.reply('ERROR 400: There was an error executing the command.');
 	}
 });
+
+
+
+//Listens to new member join
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find(ch => ch.id === '609164405883666433');
+  const firstRole = '598969307866726451';
+  if (!channel) return;
+  channel.send(`BEEP BOOP. Congrats on finding the Pixel Den, ${member}!`);
+  member.addRole(firstRole);
+});
+
 
 
 //Login to bot

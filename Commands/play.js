@@ -13,7 +13,7 @@ module.exports = {
       const queueChan = message.guild.channels.find(queueChan => queueChan.id === '598979377006641153');
       const musicChan = message.guild.channels.find(musicChan => musicChan.id === '598979052661112834');
       //Check if author typed in anything as an argument.
-      if (!args[0]) return message.channel.send('Input a URL please.');
+      if (!args[0]) return message.channel.send('Input a song please.');
       //Validate the URL. If it isn't a URL, use the search command.
       const validate = await ytdl.validateURL(args[0]);
       if (!validate) {
